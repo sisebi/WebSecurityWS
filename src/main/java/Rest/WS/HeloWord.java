@@ -5,6 +5,9 @@
  */
 package Rest.WS;
 
+import Model.Pessoa;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
@@ -18,6 +21,23 @@ import javax.ws.rs.core.SecurityContext;
 @Path("/helo")
 //@PermitAll
 public class HeloWord {
+    
+    List<Pessoa> pessoas;  
+
+    public HeloWord() {
+        this.pessoas = new ArrayList<>();
+        Pessoa p = new Pessoa(1, "eliezer", "bignati");
+        pessoas.add(p);        
+        p = new Pessoa(2, "nivia", "bignati");
+        pessoas.add(p);        
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/getPessoa")
+    public List<Pessoa> getPessoa(){
+        return this.pessoas;
+    }
     
     @GET
     @Produces("text/plain")
